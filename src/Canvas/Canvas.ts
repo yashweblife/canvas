@@ -13,18 +13,25 @@ class Color {
     return `rgba(${this.r},${this.g},${this.b},${this.a})`;
   };
 }
+interface Component2D {
+  x: number;
+  y: number;
+}
 export class Canvas {
   private dom: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  public size: number = 100;
+  public size: Component2D = { x: 300, y: 300 };
   constructor(parent: HTMLElement = document.body) {
     this.dom = document.createElement("canvas");
     this.ctx = this.dom.getContext("2d")!;
     parent.appendChild(this.dom);
   }
-  public setSize = (x: number, y: number) => {};
+  public setSize = (x: number, y: number) => {
+    this.size.x = x;
+    this.size.y = y;
+  };
   public clear = () => {
-    this.ctx.clearRect(0, 0, this.size, this.size);
+    this.ctx.clearRect(0, 0, this.size.x, this.size.y);
   };
   public begin = () => {
     this.ctx.beginPath();
